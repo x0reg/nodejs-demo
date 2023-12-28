@@ -1,0 +1,12 @@
+<main class="container" id="example">
+    <div class="bg-light p-5 rounded">
+        <h1 class="text-center">DỰ ÁN CÁ NHÂN</h1>
+        {{#if isAuthenticated}}
+        <p class="lead">Xin Chào {{user.username}}</p>
+        {{else}}
+        <p class="lead">Vui lòng đăng nhập để tiếp tục</p>
+        {{/if}}
+
+        <a class="btn btn-lg btn-primary" href="" role="button">OPEN</a>
+    </div>
+</main>
