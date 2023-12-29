@@ -1,12 +1,13 @@
 <main class="container" id="example">
     <div class="bg-light p-5 rounded">
         <h1 class="text-center">DỰ ÁN CÁ NHÂN</h1>
-        {{#if isAuthenticated}}
+        {{#if user}}
         <p class="lead">Xin Chào {{user.username}}</p>
+        <a class="btn btn-lg btn-primary" href="/auth/logout" role="button">Đăng Xuất</a>
         {{else}}
         <p class="lead">Vui lòng đăng nhập để tiếp tục</p>
+        <a class="btn btn-lg btn-danger" href="/auth/login" role="button">Đăng Nhập</a>
         {{/if}}
 
-        <a class="btn btn-lg btn-primary" href="" role="button">OPEN</a>
     </div>
 </main>

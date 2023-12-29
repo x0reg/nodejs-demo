@@ -31,12 +31,6 @@ const Users = new mongose.Schema(
     },
     ip: String,
     api_token: String,
-    createdAt: {
-      type: Date,
-    },
-    updatedAt: {
-      type: Date,
-    },
   },
   {
     timestamps: true,

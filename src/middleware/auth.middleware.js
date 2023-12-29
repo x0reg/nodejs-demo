@@ -6,26 +6,21 @@ const authMiddleware = {
   },
 
   authenticateToken: async (req, res, next) => {
-    try {
-      const access_token = req.cookies.access_token;
-      if (!access_token) {
-        // return res.json({ message: "chưa có token" });
-        req.isAuthenticated = false; // Chưa đăng nhập
-        return next();
+    const token = req.cookies["access_token"];
+    if (token) {
+      try {
+        // Xác minh token và lấy thông tin người dùng
+        const decoded = JWT.verify(token, process.env.SECRET_JWT);
+        req.user = decoded;
+        // Truyền thông tin người dùng vào res.locals
+        res.locals.user = req.user;
+        return next(); // Người dùng đã đăng nhập, tiếp tục xử lý middleware tiếp theo
+      } catch (err) {
+        res.clearCookie("access_token");
+        return res.redirect("/auth/login"); // Token không hợp lệ, trả về lỗi 401
       }
-      JWT.verify(access_token, process.env.SECRET_JWT, (err, user) => {
-        if (err) {
-          req.isAuthenticated = false; // Token không hợp lệ
-          return next();
-        }
-        req.isAuthenticated = true; // Đã đăng nhập
-        req.user = user;
-        next();
-      });
-    } catch (error) {
-      return res.json({
-        message: error,
-      });
+    } else {
+      return next();
     }
   },
 

@@ -9,5 +9,5 @@ const hoChiMinhTime = utcTime.tz("Asia/Ho_Chi_Minh");
 
 // Định dạng theo Y-m-d H:i:s
 const formattedTime = hoChiMinhTime.format("Y-MM-DD HH:mm:ss");
-
+const formattedTime = hoChiMinhTime.format(); //query
 console.log(formattedTime);
